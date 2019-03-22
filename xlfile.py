@@ -7,22 +7,25 @@ Format = ['mp4','mkv','rmvb','avi']
 
 class Xlfile(object):
 
-    def getAllDir(self,pathEntrance, filelis):
+    def __init__(self):
+        self.filelis = []
+
+    def getAllDir(self,pathEntrance):
         if os.path.exists(pathEntrance):
             li = os.listdir(pathEntrance)
             if len(li) != 0:
                 for subDir in li:
                     if os.path.isdir(pathEntrance + '\\' + subDir):
-                        self.getAllDir(pathEntrance + "\\" + subDir, filelis)
+                        self.getAllDir(pathEntrance + "\\" + subDir)
                     else:
                         if subDir.lower().split('.')[1] in Format:
-                            filelis.append(pathEntrance + "\\" + subDir)
+                            self.filelis.append(pathEntrance + "\\" + subDir)
 
-    def writeXlsx(self,xlsName,sheetName,filelis):
+    def writeXlsx(self,xlsName,sheetName):
         workbook = xlwt.Workbook(encoding="ascii")
         worksheet = workbook.add_sheet(sheetName)
         i = 0
-        for fan in filelis:
+        for fan in self.filelis:
             part = str(fan).rsplit("\\",1)
             worksheet.write(i, 0, label = part[0])
             worksheet.write(i,1,label = part[1])
@@ -31,6 +34,5 @@ class Xlfile(object):
 
 if __name__ == '__main__':
     xls = Xlfile()
-    file_li = []
-    xls.getAllDir(R"F:/TCP",file_li)
-    xls.writeXlsx("li.xls","sheet1",file_li)
+    xls.getAllDir(R"F:/TCP")
+    xls.writeXlsx("li.xls","sheet1")
