@@ -44,13 +44,17 @@ class UrlRefactor(object):
                 ret.append((eve.group(1), eve.group(2)))
         return ret
 
+    @staticmethod
+    def get_html_m3u8(htm):
+        return re.search('(https?|ftp|file)://([-A-Za-z0-9+&@#/%?=~_|!:,.;]|[^\x00-\xff])+[-A-Za-z0-9+&@#/%=~_|]', htm,
+                         re.S).group(0)
 
 def main():
     browser = UrlRefactor()
-    browser.get_html("http://www.6666caiji.com/html/vodlist/727.html")
+    browser.get_html("")
     # print(browser.page_source)
-    dic = browser.get_navigator()
-    print(dic)
+    s = UrlRefactor.get_html_m3u8(browser.page_source)
+    print(s)
 
 if __name__ == '__main__':
     main()
