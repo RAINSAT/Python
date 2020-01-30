@@ -15,7 +15,7 @@ class Kudm(object):
                     " AppleWebKit/537.36 (KHTML, like Gecko) " \
                     "Chrome/71.0.3578.80 Safari/537.36"
         self.__start_url = "http://comic.kukudm.com/comiclist/2335/"
-        self.__index = self.get_index();
+        self.__index = self.get_index()
 
     def get_index(self):
         indexurl = "http://comic.kukudm.com/comiclist/2335/index.htm"
@@ -74,6 +74,7 @@ class Kudm(object):
             ret = self.get_html_response(i, numChapter)
             if ret == -1:
                 break
+
 
 def main():
     ku = Kudm()

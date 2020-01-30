@@ -1,0 +1,1 @@
+ffmpeg -allowed_extensions ALL -i *.m3u8 -c copy new.mp4
